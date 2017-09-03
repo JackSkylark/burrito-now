@@ -28,15 +28,17 @@ public class TruckScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Vector2 translate = velocity * Time.deltaTime;
-
-        this.transform.Translate(translate);
+        if (GameManager.Instance.Lives > 0)
+        {
+            Vector2 translate = velocity * Time.deltaTime;
+            this.transform.Translate(translate);
+        }
 	}
 
     public void ShootBurrito()
     {
         var gameManger = GameManager.Instance;
-        if (gameManger.Burritos > 0)
+        if (gameManger.Lives > 0 && gameManger.Burritos > 0)
         {
             PlayShootAnimation();
             CreateBurrito();
@@ -47,6 +49,7 @@ public class TruckScript : MonoBehaviour {
     public void Die ()
     {
         Debug.Log("You died!");
+        GameManager.Instance.SubtractLife();
         this.transform.SetPositionAndRotation(_initialPosition, Quaternion.identity);
     }
 

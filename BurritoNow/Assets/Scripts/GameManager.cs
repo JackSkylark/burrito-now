@@ -72,4 +72,9 @@ public class GameManager {
             return instance;
         }
     }
+
+    public void Reset()
+    {
+        instance = new GameManager();
+    }
 }
